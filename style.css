@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+div {
+    display: flex;
+    align-items:center;
+    padding: 1em;
+    gap: 1em;
+}
+
+button {
+    flex: 1 0 100px;
+    padding: 1em;
+    background-color: blue;
+    color: white;
+    border-radius: 8px;
+}
+
+div#result-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.result {
+    font-size: 20px;
+}

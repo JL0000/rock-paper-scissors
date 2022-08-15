@@ -9,6 +9,16 @@ buttons.forEach(button => button.addEventListener("click", playRound));
 
 const result_wrapper = document.querySelector("#result-wrapper");
 
+result_wrapper.addEventListener("click", startAgain), false;
+
+function startAgain(e) {
+    console.log(e)
+    if (e.target.className === "start-again") {
+        buttons.forEach(button => button.disabled = !button.disabled);
+        cleanResultWrapper();
+        counter = 0;
+    }
+}
 
 function playRound() {
     const playerSelection = this.className;
@@ -29,7 +39,7 @@ function playRound() {
 function update(result, playerSelection, computerSelection) {
     counter += result;
     if (counter <= -5 || counter >= 5) {
-        updateFinalResult(counter);
+        updateFinalResult();
     }
     else {
         updateResult(result, playerSelection, computerSelection);
@@ -54,7 +64,7 @@ function updateResult(result, playerSelection, computerSelection){
     }
 }
 
-function updateFinalResult(counter) {
+function updateFinalResult() {
     if (counter < 0){
         displayResult("The computer is the winner");
         console.log();
@@ -65,6 +75,11 @@ function updateFinalResult(counter) {
     else {
         displayResult("It is a draw!");
     }
+    const button = document.createElement("button");
+    button.textContent = "Start again!";
+    button.classList.add("start-again");
+    result_wrapper.appendChild(button);
+    buttons.forEach(button => button.disabled = !button.disabled);
 }
 
 function displayResult(text) {
