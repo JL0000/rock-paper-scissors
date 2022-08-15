@@ -1,29 +1,39 @@
 body {
     display: flex;
     flex-direction: column;
-    align-content: center;
+    align-items: center;
+    background-color: #282a36;
+    color: white;
+    font-size: 20px;
 }
 
-div {
+button {
+    width: 100px;
+    padding: 1em;
+    background-color: #bd93f9;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    font-size: 15px;
+}
+
+div.selection {
     display: flex;
     align-items:center;
     padding: 1em;
     gap: 1em;
 }
 
-button {
-    flex: 1 0 100px;
-    padding: 1em;
-    background-color: blue;
-    color: white;
-    border-radius: 8px;
-}
 
-div#result-wrapper {
+div.result-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: -1em;
 }
 
-.result {
-    font-size: 20px;
+
+
+.start-again {
+    width: 150px;
 }

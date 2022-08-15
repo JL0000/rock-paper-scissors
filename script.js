@@ -1,3 +1,4 @@
+const MAX_RESULTS = 8
 const DRAW = 0;
 const LOSE = -1;
 const WIN = 1;
@@ -7,15 +8,15 @@ const buttons = document.querySelectorAll("button");
 
 buttons.forEach(button => button.addEventListener("click", playRound));
 
-const result_wrapper = document.querySelector("#result-wrapper");
+const result_wrapper = document.querySelector(".result-wrapper");
 
-result_wrapper.addEventListener("click", startAgain), false;
+result_wrapper.addEventListener("click", reset), false;
 
-function startAgain(e) {
+function reset(e) {
     console.log(e)
     if (e.target.className === "start-again") {
         buttons.forEach(button => button.disabled = !button.disabled);
-        cleanResultWrapper();
+        limitResultWrapperChild(0);
         counter = 0;
     }
 }
@@ -65,33 +66,34 @@ function updateResult(result, playerSelection, computerSelection){
 }
 
 function updateFinalResult() {
-    if (counter < 0){
-        displayResult("The computer is the winner");
-        console.log();
-    }
-    else if (counter > 0) {
-        displayResult("The player is the winner");
-    }
-    else {
-        displayResult("It is a draw!");
-    }
+    limitResultWrapperChild(0);
     const button = document.createElement("button");
     button.textContent = "Start again!";
     button.classList.add("start-again");
     result_wrapper.appendChild(button);
     buttons.forEach(button => button.disabled = !button.disabled);
+    if (counter < 0){
+        displayResult("The computer is the winner");
+        console.log();
+    }
+    else if (counter > 0) {
+        displayResult("You are the winner");
+    }
+    else {
+        displayResult("It is a draw!");
+    }
 }
 
 function displayResult(text) {
-    cleanResultWrapper();
+    limitResultWrapperChild(MAX_RESULTS);
     const result_p = document.createElement("p");
     result_p.classList.add("result");
     result_p.textContent = text;
     result_wrapper.appendChild(result_p);
 }
 
-function cleanResultWrapper() {
-    while (result_wrapper.firstChild) {
+function limitResultWrapperChild(n) {
+    while (result_wrapper.childElementCount > n) {
         result_wrapper.removeChild(result_wrapper.firstChild);
     }
 }
